@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Lab Reportes: Next.js + PostgreSQL Dashboard
 
 Este proyecto es un dashboard de reportes para una tienda en línea, construido con **Next.js 14 (App Router)** y **PostgreSQL**, totalmente contenerizado con **Docker Compose**.
@@ -123,6 +123,3 @@ Abrir **http://localhost:3000**
 En teoria es mas rapido por que en lugar de leer toda la tabla buscadno por ejemplo el id de un usuario, debeira de ir directo si ya conoce su id 
 pero al ser una tabla muy pequeña, la base decide leer toda la tabla
 
-
-
->>>>>>> 1bb874868bc491e7ef1d31acbcd31d9c5103a3af

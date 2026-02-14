@@ -45,6 +45,8 @@ JOIN orden_detalles od ON p.id = od.producto_id
 GROUP BY c.id, c.nombre
 HAVING SUM(od.subtotal) > 0;
 
+-- VERIFY: SELECT * FROM view_categorias_top ORDER BY ingresos_totales DESC;
+
 
 --View 3
 
@@ -89,7 +91,7 @@ FROM ordenes
 GROUP BY status
 HAVING COUNT(id) >= 1;
 
--- VERIFY: SELECT * FROM view_estado_ordenes;
+-- VERIFY: SELECT * FROM view_estado_ordenes ORDER BY cantidad_pedidos DESC;
 
 
 --View 5
@@ -108,5 +110,7 @@ SELECT
     ROUND(AVG(o.total), 2) AS ticket_promedio
 FROM ordenes o
 GROUP BY DATE(o.created_at);
+
+-- VERIFY: SELECT * FROM view_ventas_diarias ORDER BY fecha_venta DESC LIMIT 7;
 
 

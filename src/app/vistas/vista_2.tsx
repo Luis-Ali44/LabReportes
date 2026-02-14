@@ -45,16 +45,16 @@ export default function Vista2() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+      <div className="text-center py-12 text-slate-500">
+        Cargando datos...
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-red-500/10 border border-red-500 rounded-xl p-6 text-red-400">
-        <p className="font-semibold">Error:</p>
+      <div className="bg-red-50 border border-red-200 rounded p-4 text-red-600">
+        <p className="font-bold">Error:</p>
         <p>{error}</p>
       </div>
     );
@@ -64,28 +64,28 @@ export default function Vista2() {
     <div>
       {/* KPIs */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div className="bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-500/30 rounded-xl p-6">
-          <p className="text-emerald-400 text-sm mb-1">Total Ingresos</p>
-          <p className="text-3xl font-bold text-white">${totalIngresos.toLocaleString()}</p>
+        <div className="bg-white border border-slate-300 rounded p-4 text-center shadow-sm">
+          <p className="text-slate-500 text-sm mb-1 uppercase tracking-wide">Total Ingresos</p>
+          <p className="text-3xl font-bold text-slate-800">${totalIngresos.toLocaleString()}</p>
         </div>
-        <div className="bg-gradient-to-br from-amber-500/20 to-orange-600/20 border border-amber-500/30 rounded-xl p-6">
-          <p className="text-amber-400 text-sm mb-1">Categorías con Ganancias Altas</p>
-          <p className="text-3xl font-bold text-white">{categoriasAltas}</p>
+        <div className="bg-white border border-slate-300 rounded p-4 text-center shadow-sm">
+          <p className="text-slate-500 text-sm mb-1 uppercase tracking-wide">Categorías Top</p>
+          <p className="text-3xl font-bold text-slate-800">{categoriasAltas}</p>
         </div>
-        <div className="bg-gradient-to-br from-purple-500/20 to-violet-600/20 border border-purple-500/30 rounded-xl p-6">
-          <p className="text-purple-400 text-sm mb-1">Mejor Categoría</p>
-          <p className="text-2xl font-bold text-white">{mejorCategoria?.categoria || "N/A"}</p>
+        <div className="bg-white border border-slate-300 rounded p-4 text-center shadow-sm">
+          <p className="text-slate-500 text-sm mb-1 uppercase tracking-wide">Mejor Categoría</p>
+          <p className="text-2xl font-bold text-slate-800">{mejorCategoria?.categoria || "N/A"}</p>
         </div>
       </div>
 
       {/* Filtros */}
-      <div className="flex flex-wrap gap-4 mb-6">
+      <div className="flex flex-wrap gap-4 mb-6 bg-slate-50 p-4 rounded border border-slate-200">
         <div className="flex items-center gap-2">
-          <label className="text-slate-400 text-sm">Filtrar por estatus:</label>
+          <label className="text-slate-700 text-sm font-medium">Filtrar por estatus:</label>
           <select
             value={filtroEstatus}
             onChange={(e) => setFiltroEstatus(e.target.value)}
-            className="bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-emerald-500"
+            className="bg-white border border-slate-300 rounded px-3 py-1 text-slate-700 text-sm"
           >
             <option value="todos">Todos</option>
             <option value="Ganancias Altas">Ganancias Altas</option>
@@ -95,26 +95,26 @@ export default function Vista2() {
       </div>
 
       {/* Tabla */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-left">
+      <div className="overflow-x-auto border border-slate-200 rounded">
+        <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-slate-700">
-              <th className="py-4 px-4 text-slate-400 font-medium">Categoría</th>
-              <th className="py-4 px-4 text-slate-400 font-medium text-right">Ingresos Totales</th>
-              <th className="py-4 px-4 text-slate-400 font-medium text-center">Estatus</th>
+            <tr className="bg-slate-100 border-b border-slate-200">
+              <th className="py-3 px-4 text-slate-700 font-semibold text-sm">Categoría</th>
+              <th className="py-3 px-4 text-slate-700 font-semibold text-sm text-right">Ingresos Totales</th>
+              <th className="py-3 px-4 text-slate-700 font-semibold text-sm text-center">Estatus</th>
             </tr>
           </thead>
           <tbody>
             {data.map((row, index) => (
-              <tr key={index} className="border-b border-slate-700/50 hover:bg-slate-700/30 transition-colors">
-                <td className="py-4 px-4 text-white font-medium">{row.categoria}</td>
-                <td className="py-4 px-4 text-emerald-400 text-right font-semibold">
+              <tr key={index} className="border-b border-slate-100 hover:bg-slate-50">
+                <td className="py-3 px-4 text-slate-800 font-medium">{row.categoria}</td>
+                <td className="py-3 px-4 text-slate-600 text-right font-semibold">
                   ${Number(row.ingresos_totales || 0).toLocaleString()}
                 </td>
-                <td className="py-4 px-4 text-center">
-                  <span className={`inline-flex px-3 py-1 rounded-full text-sm font-medium ${row.estatus_negocio === "Ganancias Altas"
-                      ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                      : "bg-slate-500/20 text-slate-400 border border-slate-500/30"
+                <td className="py-3 px-4 text-center">
+                  <span className={`inline-flex px-3 py-1 rounded text-xs font-bold ${row.estatus_negocio === "Ganancias Altas"
+                    ? "bg-green-100 text-green-800"
+                    : "bg-slate-100 text-slate-600"
                     }`}>
                     {row.estatus_negocio}
                   </span>

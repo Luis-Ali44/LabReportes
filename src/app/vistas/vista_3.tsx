@@ -50,16 +50,16 @@ export default function Vista3() {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-12">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+      <div className="text-center py-12 text-slate-500">
+        Cargando datos...
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-red-500/10 border border-red-500 rounded-xl p-6 text-red-400">
-        <p className="font-semibold">Error:</p>
+      <div className="bg-red-50 border border-red-200 rounded p-4 text-red-600">
+        <p className="font-bold">Error:</p>
         <p>{error}</p>
       </div>
     );
@@ -69,38 +69,38 @@ export default function Vista3() {
     <div>
       {/* KPIs */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <div className="bg-gradient-to-br from-blue-500/20 to-indigo-600/20 border border-blue-500/30 rounded-xl p-6">
-          <p className="text-blue-400 text-sm mb-1">Valor Total Inventario</p>
-          <p className="text-3xl font-bold text-white">${valorTotalInventario.toLocaleString()}</p>
+        <div className="bg-white border border-slate-300 rounded p-4 text-center shadow-sm">
+          <p className="text-slate-500 text-sm mb-1 uppercase tracking-wide">Valor Inventario</p>
+          <p className="text-3xl font-bold text-slate-800">${valorTotalInventario.toLocaleString()}</p>
         </div>
-        <div className="bg-gradient-to-br from-emerald-500/20 to-teal-600/20 border border-emerald-500/30 rounded-xl p-6">
-          <p className="text-emerald-400 text-sm mb-1">Unidades Vendidas (mostradas)</p>
-          <p className="text-3xl font-bold text-white">{totalUnidadesVendidas.toLocaleString()}</p>
+        <div className="bg-white border border-slate-300 rounded p-4 text-center shadow-sm">
+          <p className="text-slate-500 text-sm mb-1 uppercase tracking-wide">Unidades Vendidas</p>
+          <p className="text-3xl font-bold text-slate-800">{totalUnidadesVendidas.toLocaleString()}</p>
         </div>
-        <div className="bg-gradient-to-br from-red-500/20 to-rose-600/20 border border-red-500/30 rounded-xl p-6">
-          <p className="text-red-400 text-sm mb-1">Productos Sin Stock</p>
-          <p className="text-3xl font-bold text-white">{productosSinStock}</p>
+        <div className="bg-white border border-slate-300 rounded p-4 text-center shadow-sm">
+          <p className="text-slate-500 text-sm mb-1 uppercase tracking-wide">Sin Stock</p>
+          <p className="text-3xl font-bold text-red-600">{productosSinStock}</p>
         </div>
       </div>
 
       {/* Filtros */}
-      <div className="flex flex-wrap gap-4 mb-6">
+      <div className="flex flex-wrap gap-4 mb-6 bg-slate-50 p-4 rounded border border-slate-200">
         <div className="flex items-center gap-2">
-          <label className="text-slate-400 text-sm">Stock mínimo:</label>
+          <label className="text-slate-700 text-sm font-medium">Stock mínimo:</label>
           <input
             type="number"
             value={stockMinimo}
             onChange={(e) => { setStockMinimo(e.target.value === "" ? "" : Number(e.target.value)); setPage(1); }}
             placeholder="Ej: 10"
-            className="bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm w-24 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="bg-white border border-slate-300 rounded px-3 py-1 text-slate-700 text-sm w-24"
           />
         </div>
         <div className="flex items-center gap-2">
-          <label className="text-slate-400 text-sm">Mostrar:</label>
+          <label className="text-slate-700 text-sm font-medium">Mostrar:</label>
           <select
             value={limit}
             onChange={(e) => { setLimit(Number(e.target.value)); setPage(1); }}
-            className="bg-slate-700 border border-slate-600 rounded-lg px-3 py-2 text-white text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="bg-white border border-slate-300 rounded px-3 py-1 text-slate-700 text-sm"
           >
             <option value={5}>5</option>
             <option value={10}>10</option>
@@ -111,30 +111,30 @@ export default function Vista3() {
       </div>
 
       {/* Tabla */}
-      <div className="overflow-x-auto">
-        <table className="w-full text-left">
+      <div className="overflow-x-auto border border-slate-200 rounded">
+        <table className="w-full text-left border-collapse">
           <thead>
-            <tr className="border-b border-slate-700">
-              <th className="py-4 px-4 text-slate-400 font-medium">Producto</th>
-              <th className="py-4 px-4 text-slate-400 font-medium text-right">Stock Actual</th>
-              <th className="py-4 px-4 text-slate-400 font-medium text-right">Unidades Vendidas</th>
-              <th className="py-4 px-4 text-slate-400 font-medium text-right">Valor del Stock</th>
+            <tr className="bg-slate-100 border-b border-slate-200">
+              <th className="py-3 px-4 text-slate-700 font-semibold text-sm">Producto</th>
+              <th className="py-3 px-4 text-slate-700 font-semibold text-sm text-right">Stock Actual</th>
+              <th className="py-3 px-4 text-slate-700 font-semibold text-sm text-right">Unidades Vendidas</th>
+              <th className="py-3 px-4 text-slate-700 font-semibold text-sm text-right">Valor del Stock</th>
             </tr>
           </thead>
           <tbody>
             {data.map((row, index) => (
-              <tr key={index} className="border-b border-slate-700/50 hover:bg-slate-700/30 transition-colors">
-                <td className="py-4 px-4 text-white font-medium">{row.producto}</td>
-                <td className="py-4 px-4 text-right">
-                  <span className={`font-semibold ${row.stock_actual === 0 ? "text-red-400" :
-                      row.stock_actual < 20 ? "text-amber-400" :
-                        "text-emerald-400"
+              <tr key={index} className="border-b border-slate-100 hover:bg-slate-50">
+                <td className="py-3 px-4 text-slate-800 font-medium">{row.producto}</td>
+                <td className="py-3 px-4 text-right">
+                  <span className={`font-semibold ${row.stock_actual === 0 ? "text-red-600" :
+                    row.stock_actual < 20 ? "text-orange-600" :
+                      "text-green-600"
                     }`}>
                     {row.stock_actual}
                   </span>
                 </td>
-                <td className="py-4 px-4 text-slate-300 text-right">{row.total_vendido}</td>
-                <td className="py-4 px-4 text-blue-400 text-right font-semibold">
+                <td className="py-3 px-4 text-slate-600 text-right">{row.total_vendido}</td>
+                <td className="py-3 px-4 text-slate-800 text-right font-medium">
                   ${Number(row.valor_monetario_stock || 0).toLocaleString()}
                 </td>
               </tr>
@@ -152,14 +152,14 @@ export default function Vista3() {
           <button
             onClick={() => setPage(p => Math.max(1, p - 1))}
             disabled={page === 1}
-            className="px-4 py-2 bg-slate-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-600 transition-colors"
+            className="px-3 py-1 bg-white border border-slate-300 text-slate-600 rounded disabled:opacity-50 hover:bg-slate-50"
           >
             Anterior
           </button>
           <button
             onClick={() => setPage(p => p + 1)}
             disabled={data.length < limit}
-            className="px-4 py-2 bg-slate-700 text-white rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-slate-600 transition-colors"
+            className="px-3 py-1 bg-white border border-slate-300 text-slate-600 rounded disabled:opacity-50 hover:bg-slate-50"
           >
             Siguiente
           </button>

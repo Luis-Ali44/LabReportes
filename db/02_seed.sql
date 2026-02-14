@@ -1,14 +1,3 @@
--- ============================================
--- SEED.SQL - Datos Iniciales
--- ============================================
--- Equipo: [Nombre del equipo]
--- Fecha: [Fecha]
--- ============================================
--- ORDEN DE INSERCIÓN:
--- 1. Catálogos (sin dependencias)
--- 2. Entidades principales
--- 3. Relaciones/transacciones
--- ============================================
 
 -- ============================================
 -- 1. CATÁLOGOS
